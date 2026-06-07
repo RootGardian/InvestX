@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "portfolio": "My Portfolio",
+    "deposit": "Deposit Funds",
+    "markets": "Live Markets",
+    "buy": "Buy",
+    "sell": "Sell",
+    "alerts": "P2P Trading",
+    "profile": "Profile",
+    "logout": "Log Out",
+    "admin_dashboard": "Admin Dashboard",
+    "users": "User Management",
+    "history": "Global History",
+    "back_admin": "Back to Admin",
+    "client_view": "Client View"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome_text": "Welcome {{name}}, here is an overview of your performance.",
+    "deposit_btn": "Deposit",
+    "buy_btn": "Buy",
+    "total_balance": "Total Value",
+    "total": "Total",
+    "available_cash": "Available Cash",
+    "add_btn": "Add",
+    "pl_assets": "Assets P&L",
+    "unrealized": "Unrealized",
+    "overview": "Overview",
+    "value": "Value",
+    "allocation": "Allocation",
+    "no_allocation": "No allocation",
+    "days_ago": "{{count}}d ago",
+    "today": "Today"
+  },
+  "auth": {
+    "login_title": "Sign In",
+    "login_subtitle": "Access your simulation portfolio.",
+    "email_placeholder": "Email address",
+    "password_placeholder": "Password",
+    "forgot_password": "Forgot password?",
+    "login_btn": "Sign In",
+    "login_loading": "Loading...",
+    "signup_title": "Create an Account",
+    "signup_subtitle": "Start with $100,000 virtual cash.",
+    "name_placeholder": "Full name",
+    "signup_btn": "Open an Account",
+    "signup_loading": "Creating...",
+    "welcome_back_title": "Welcome Back!",
+    "welcome_back_desc": "Already have an InvestX account? Sign in to resume managing your portfolios and monitoring the markets.",
+    "new_trader_title": "New Trader?",
+    "new_trader_desc": "Open a free simulation account and discover our institutional real-time market analysis tools."
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "success": "Success",
+    "error": "Error"
+  },
+  "header": {
+    "home": "Home",
+    "markets": "Markets",
+    "tools": "Tools",
+    "pricing": "Pricing",
+    "signin": "Sign In",
+    "signup": "Open an Account"
+  },
+  "landing": {
+    "hero_badge": "Real-time trading simulation",
+    "hero_title_1": "Master financial markets ",
+    "hero_title_highlight": "without any risk",
+    "hero_subtitle": "Take advantage of a virtual $100,000 portfolio to invest in global stocks and cryptocurrencies. Discover institutional analysis tools, sharpen your strategies, and become a successful trader.",
+    "start_trading": "Start Trading",
+    "discover_platform": "Discover Platform",
+    "feature_fast": "Ultra-fast execution",
+    "feature_realtime": "Real market data",
+    "mock_balance_title": "Portfolio Balance",
+    "mock_market_status": "Current Market",
+    "mock_trend_up": "Bullish Trend"
+  }
+}

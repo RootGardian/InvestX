@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "portfolio": "Mon Portefeuille",
+    "deposit": "Déposer des fonds",
+    "markets": "Marché en Direct",
+    "buy": "Acheter",
+    "sell": "Vendre",
+    "alerts": "Trading P2P",
+    "profile": "Profil",
+    "logout": "Déconnexion",
+    "admin_dashboard": "Admin Dashboard",
+    "users": "Gestion Utilisateurs",
+    "history": "Historique Global",
+    "back_admin": "Retour Admin",
+    "client_view": "Vue Client"
+  },
+  "dashboard": {
+    "title": "Tableau de Bord",
+    "welcome_text": "Bienvenue {{name}}, voici un aperçu de vos performances.",
+    "deposit_btn": "Déposer",
+    "buy_btn": "Acheter",
+    "total_balance": "Valeur Totale",
+    "total": "Total",
+    "available_cash": "Cash Disponible",
+    "add_btn": "Ajouter",
+    "pl_assets": "P&L Actifs",
+    "unrealized": "Latent",
+    "overview": "Vue d'ensemble",
+    "value": "Valeur",
+    "allocation": "Allocation",
+    "no_allocation": "Aucune allocation",
+    "days_ago": "Il y a {{count}}j",
+    "today": "Aujourd'hui"
+  },
+  "auth": {
+    "login_title": "Connexion",
+    "login_subtitle": "Accédez à votre portefeuille de simulation.",
+    "email_placeholder": "Adresse email",
+    "password_placeholder": "Mot de passe",
+    "forgot_password": "Mot de passe oublié ?",
+    "login_btn": "Se Connecter",
+    "login_loading": "Chargement...",
+    "signup_title": "Créer un compte",
+    "signup_subtitle": "Démarrez avec 100 000 $ virtuels.",
+    "name_placeholder": "Nom complet",
+    "signup_btn": "Ouvrir un compte",
+    "signup_loading": "Création...",
+    "welcome_back_title": "Bon retour !",
+    "welcome_back_desc": "Vous avez déjà un compte InvestX ? Connectez-vous pour reprendre la gestion de vos portefeuilles et surveiller les marchés.",
+    "new_trader_title": "Nouveau Trader ?",
+    "new_trader_desc": "Ouvrez un compte de simulation gratuitement et découvrez nos outils institutionnels d'analyse de marché en temps réel."
+  },
+  "common": {
+    "loading": "Chargement...",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "success": "Succès",
+    "error": "Erreur"
+  },
+  "header": {
+    "home": "Accueil",
+    "markets": "Marchés",
+    "tools": "Outils",
+    "pricing": "Tarifs",
+    "signin": "Se connecter",
+    "signup": "Ouvrir un compte"
+  },
+  "landing": {
+    "hero_badge": "Simulation de trading en temps réel",
+    "hero_title_1": "Maîtrisez les marchés financiers ",
+    "hero_title_highlight": "sans aucun risque",
+    "hero_subtitle": "Profitez d'une enveloppe virtuelle de 100 000 $ pour investir dans les actions mondiales et les cryptomonnaies. Découvrez des outils d'analyse institutionnels, affûtez vos stratégies et devenez un trader performant.",
+    "start_trading": "Commencer à trader",
+    "discover_platform": "Découvrir la plateforme",
+    "feature_fast": "Exécution ultra-rapide",
+    "feature_realtime": "Données du marché réel",
+    "mock_balance_title": "Solde du portefeuille",
+    "mock_market_status": "Marché Actuel",
+    "mock_trend_up": "Tendance Haussière"
+  }
+}

@@ -1,0 +1,128 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id              String            @id @default(uuid())
+  email           String            @unique
+  name            String?
+  passwordHash    String
+  avatarUrl       String?
+  currency        String            @default("USD")
+  role            UserRole          @default(USER)
+  cashBalance     Decimal           @default(100000.00) @db.Decimal(12, 2)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  assets          PortfolioAsset[]
+  transactions    Transaction[]
+  priceAlerts     PriceAlert[]
+  orders          Order[]
+}
+
+model PortfolioAsset {
+  id              String   @id @default(uuid())
+  userId          String
+  ticker          String
+  quantity        Decimal  @db.Decimal(10, 4)
+  averageBuyPrice Decimal  @db.Decimal(10, 4)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user            User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, ticker])
+}
+
+model Transaction {
+  id               String   @id @default(uuid())
+  userId           String
+  ticker           String
+  type             TransactionType
+  quantity         Decimal  @db.Decimal(10, 4)
+  pricePerShare    Decimal  @db.Decimal(12, 4)
+  totalAmount      Decimal  @db.Decimal(12, 4)
+  currency         String   @default("USD")
+  exchangeRateUsed Decimal  @default(1.0) @db.Decimal(12, 6)
+  timestamp        DateTime @default(now())
+
+  user             User     @relation(fields: [userId], references: [id])
+}
+
+model PriceAlert {
+  id              String   @id @default(uuid())
+  userId          String
+  ticker          String
+  targetPrice     Decimal  @db.Decimal(12, 4)
+  condition       AlertCondition
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+
+  user            User     @relation(fields: [userId], references: [id])
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  userId          String
+  ticker          String
+  side            OrderSide
+  price           Decimal     @db.Decimal(12, 4)
+  quantity        Decimal     @db.Decimal(10, 4)
+  filledQuantity  Decimal     @default(0) @db.Decimal(10, 4)
+  status          OrderStatus @default(OPEN)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  user            User        @relation(fields: [userId], references: [id])
+
+  @@index([ticker, side, status, price, createdAt])
+}
+
+enum TransactionType {
+  BUY
+  SELL
+}
+
+enum AlertCondition {
+  ABOVE
+  BELOW
+}
+
+enum OrderSide {
+  BUY
+  SELL
+}
+
+enum OrderStatus {
+  OPEN
+  PARTIALLY_FILLED
+  FILLED
+  CANCELLED
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model SentimentAnalysis {
+  id              String   @id @default(uuid())
+  ticker          String
+  headline        String
+  source          String?
+  url             String?
+  rawText         String   @db.Text
+  tokens          String[] @default([])
+  filteredTokens  String[] @default([])
+  sentimentScore  Decimal  @db.Decimal(6, 4)
+  sentimentLabel  String
+  processedAt     DateTime @default(now())
+
+  @@index([ticker, processedAt])
+}
