@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiFetch } from '../utils/api';
 import { ShoppingCart, Wallet, Loader2, CheckCircle2 } from 'lucide-react';
 import { useFormatters } from '../hooks/useFormatters';
 import { useAuth } from '../contexts/AuthContext';
@@ -18,7 +19,7 @@ const SellPage = () => {
   useEffect(() => {
     const fetchPortfolio = async () => {
       try {
-        const res = await fetch('/api/dashboard/summary', {
+        const res = await apiFetch('/api/dashboard/summary', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await res.json();
@@ -46,7 +47,7 @@ const SellPage = () => {
     setStatus({ type: '', message: '' });
 
     try {
-      const res = await fetch('/api/trading/sell', {
+      const res = await apiFetch('/api/trading/sell', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

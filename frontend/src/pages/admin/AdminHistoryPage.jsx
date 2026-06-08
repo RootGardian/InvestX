@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiFetch } from '../../utils/api';
 import { useAuth } from '../../contexts/AuthContext';
 import { Search, User, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 
@@ -11,7 +12,7 @@ const AdminHistoryPage = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const res = await fetch('/api/admin/history', {
+        const res = await apiFetch('/api/admin/history', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {

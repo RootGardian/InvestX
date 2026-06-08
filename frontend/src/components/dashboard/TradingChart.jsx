@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createChart, ColorType, LineStyle, CandlestickSeries } from 'lightweight-charts';
 import { Loader2 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { apiFetch } from '../../utils/api';
 
 const TradingChart = ({ ticker }) => {
   const chartContainerRef = useRef(null);
@@ -22,7 +23,7 @@ const TradingChart = ({ ticker }) => {
         const to = new Date().toISOString();
         const from = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString(); // 90 days ago
         
-        const res = await fetch(`/api/market/candles/${ticker}?period1=${from}&period2=${to}&interval=1d`, {
+        const res = await apiFetch(`/api/market/candles/${ticker}?period1=${from}&period2=${to}&interval=1d`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         

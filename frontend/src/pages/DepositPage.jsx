@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../utils/api';
 import { ShieldCheck, ArrowRight, Loader2, CheckCircle2 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -14,7 +15,7 @@ const DepositPage = () => {
     setStatus({ type: '', message: '' });
 
     try {
-      const res = await fetch('/api/users/deposit', {
+      const res = await apiFetch('/api/users/deposit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

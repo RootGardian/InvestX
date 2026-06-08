@@ -87,6 +87,7 @@ model Order {
 enum TransactionType {
   BUY
   SELL
+  DEPOSIT
 }
 
 enum AlertCondition {

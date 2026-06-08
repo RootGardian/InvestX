@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiFetch } from '../../utils/api';
 import { useAuth } from '../../contexts/AuthContext';
 import { Users, DollarSign, Activity, FileText, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -19,13 +20,13 @@ const AdminDashboardPage = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const statsRes = await fetch('/api/admin/stats', {
+        const statsRes = await apiFetch('/api/admin/stats', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const statsData = await statsRes.json();
         if (statsRes.ok) setStats(statsData);
 
-        const histRes = await fetch('/api/admin/history', {
+        const histRes = await apiFetch('/api/admin/history', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const histData = await histRes.json();

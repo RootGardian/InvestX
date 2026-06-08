@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../utils/api';
 import { useAuth } from '../contexts/AuthContext';
 import { CreditCard, Trash2, Globe, DollarSign } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -24,7 +25,7 @@ const ProfilePage = () => {
 
     try {
       if (formData.password) {
-        const response = await fetch('/api/users/profile', {
+        const response = await apiFetch('/api/users/profile', {
           method: 'PUT',
           headers: { 
             'Content-Type': 'application/json',

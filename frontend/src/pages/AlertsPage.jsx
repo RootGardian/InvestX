@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiFetch } from '../utils/api';
 import { ArrowDownRight, ArrowUpRight, Loader2, RefreshCw, Trash2 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useFormatters } from '../hooks/useFormatters';
@@ -31,8 +32,8 @@ const AlertsPage = () => {
     setIsLoading(true);
     try {
       const [obRes, moRes] = await Promise.all([
-        fetch(`/api/orderbook/${ticker}`, { headers: { 'Authorization': `Bearer ${token}` } }),
-        fetch('/api/orderbook/my-orders', { headers: { 'Authorization': `Bearer ${token}` } })
+        apiFetch(`/api/orderbook/${ticker}`, { headers: { 'Authorization': `Bearer ${token}` } }),
+        apiFetch('/api/orderbook/my-orders', { headers: { 'Authorization': `Bearer ${token}` } })
       ]);
       
       const obData = await obRes.json();
@@ -64,7 +65,7 @@ const AlertsPage = () => {
     setStatus({ type: '', message: '' });
     
     try {
-      const res = await fetch('/api/orderbook/orders', {
+      const res = await apiFetch('/api/orderbook/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +95,7 @@ const AlertsPage = () => {
 
   const handleCancel = async (id) => {
     try {
-      await fetch(`/api/orderbook/orders/${id}`, {
+      await apiFetch(`/api/orderbook/orders/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

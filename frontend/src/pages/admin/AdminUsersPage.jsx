@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiFetch } from '../../utils/api';
 import { useAuth } from '../../contexts/AuthContext';
 import { User, Key, ArrowDownCircle, ArrowUpCircle, Search } from 'lucide-react';
 
@@ -11,7 +12,7 @@ const AdminUsersPage = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch('/api/admin/users', {
+        const res = await apiFetch('/api/admin/users', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
