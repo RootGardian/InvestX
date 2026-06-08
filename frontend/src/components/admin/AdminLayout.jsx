@@ -37,7 +37,7 @@ const AdminLayout = () => {
         onClick={onClick}
         className={`group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all mb-1 ${
           isActive 
-            ? 'bg-[#5e35b1] text-white shadow-lg shadow-[#5e35b1]/25' 
+            ? 'bg-primary text-white shadow-lg shadow-primary/25' 
             : 'text-textMuted hover:bg-card hover:text-textMain'
         }`}
       >
@@ -51,12 +51,12 @@ const AdminLayout = () => {
     <div className="flex h-screen bg-background overflow-hidden text-textMain font-sans">
       
       {/* Sidebar (Desktop) */}
-      <div className="hidden md:flex md:w-[280px] md:flex-col border-r border-border bg-[#0d1117]">
+      <div className="hidden md:flex md:w-[280px] md:flex-col border-r border-border bg-card">
         <div className="flex flex-col flex-grow pt-8 overflow-y-auto">
           {/* Logo */}
           <div className="flex items-center flex-shrink-0 px-8 mb-10">
             <Link to="/admin" className="flex items-center gap-3">
-              <div className="bg-[#5e35b1] w-10 h-10 rounded-xl flex items-center justify-center shadow-lg shadow-[#5e35b1]/20">
+              <div className="bg-primary w-10 h-10 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
                 <span className="text-white font-bold text-lg">IX</span>
               </div>
               <span className="text-xl font-bold tracking-tight text-textMain">InvestX</span>
@@ -103,14 +103,14 @@ const AdminLayout = () => {
       <div className="flex flex-col flex-1 w-0 overflow-hidden">
         
         {/* Top bar mobile only */}
-        <div className="h-14 md:hidden bg-[#0B0E14] border-b border-border flex items-center justify-between px-4">
+        <div className="h-14 md:hidden bg-card border-b border-border flex items-center justify-between px-4">
           <Link to="/admin" className="flex items-center gap-3">
-            <div className="bg-[#5e35b1] w-8 h-8 rounded-lg flex items-center justify-center">
+            <div className="bg-primary w-8 h-8 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">IX</span>
             </div>
           </Link>
           <button
-            className="text-textMuted focus:outline-none bg-[#0B0E14]"
+            className="text-textMuted focus:outline-none bg-card"
             onClick={() => setIsMobileMenuOpen(true)}
           >
             <Menu className="h-6 w-6" />
@@ -129,7 +129,7 @@ const AdminLayout = () => {
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-50 flex md:hidden">
           <div className="fixed inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)}></div>
-          <div className="relative flex-1 flex flex-col max-w-[280px] w-full bg-[#0d1117] h-full shadow-2xl">
+          <div className="relative flex-1 flex flex-col max-w-[280px] w-full bg-card h-full shadow-2xl">
             <div className="absolute top-0 right-0 -mr-12 pt-4">
               <button
                 className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white bg-card"
@@ -141,7 +141,7 @@ const AdminLayout = () => {
             
             <div className="flex items-center flex-shrink-0 px-8 py-8">
               <div className="flex items-center gap-3">
-                <div className="bg-[#5e35b1] w-10 h-10 rounded-xl flex items-center justify-center shadow-lg shadow-[#5e35b1]/20">
+                <div className="bg-primary w-10 h-10 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
                   <span className="text-white font-bold text-lg">IX</span>
                 </div>
                 <span className="text-xl font-bold tracking-tight text-textMain">InvestX Admin</span>
