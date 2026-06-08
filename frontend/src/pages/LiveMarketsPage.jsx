@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiFetch } from '../utils/api';
 import { Search, TrendingUp, TrendingDown, Loader2 } from 'lucide-react';
 import { useFormatters } from '../hooks/useFormatters';
 import { useAuth } from '../contexts/AuthContext';
@@ -25,7 +26,7 @@ const LiveMarketsPage = () => {
     const fetchMarkets = async () => {
       try {
         const tickers = ASSETS.map(a => a.ticker).join(',');
-        const res = await fetch(`/api/market/quotes-batch?tickers=${tickers}`, {
+        const res = await apiFetch(`/api/market/quotes-batch?tickers=${tickers}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await res.json();

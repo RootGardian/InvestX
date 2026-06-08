@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import i18n from '../i18n';
+import { apiFetch } from '../utils/api';
 
 const AuthContext = createContext();
 
@@ -22,7 +23,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       try {
-        const res = await fetch('/api/users/profile', {
+        const res = await apiFetch('/api/users/profile', {
           headers: {
             'Authorization': `Bearer ${token}`
           }

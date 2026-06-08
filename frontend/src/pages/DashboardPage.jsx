@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiFetch } from '../utils/api';
 import { useAuth } from '../contexts/AuthContext';
 import { useFormatters } from '../hooks/useFormatters';
 import { useTranslation } from 'react-i18next';
@@ -21,7 +22,7 @@ const DashboardPage = () => {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const res = await fetch('/api/dashboard/summary', {
+        const res = await apiFetch('/api/dashboard/summary', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await res.json();

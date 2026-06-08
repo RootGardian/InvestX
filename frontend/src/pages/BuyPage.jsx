@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiFetch } from '../utils/api';
 import { ShoppingCart, TrendingUp, Loader2, CheckCircle2 } from 'lucide-react';
 import { useFormatters } from '../hooks/useFormatters';
 import { useAuth } from '../contexts/AuthContext';
@@ -27,7 +28,7 @@ const BuyPage = () => {
     const fetchPrice = async () => {
       setIsLoadingPrice(true);
       try {
-        const res = await fetch(`/api/market/quote/${selectedAsset}`, {
+        const res = await apiFetch(`/api/market/quote/${selectedAsset}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await res.json();
@@ -50,7 +51,7 @@ const BuyPage = () => {
     setStatus({ type: '', message: '' });
 
     try {
-      const res = await fetch('/api/trading/buy', {
+      const res = await apiFetch('/api/trading/buy', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

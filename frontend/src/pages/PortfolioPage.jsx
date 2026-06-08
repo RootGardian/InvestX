@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiFetch } from '../utils/api';
 import { Wallet, DollarSign, Loader2 } from 'lucide-react';
 import { useFormatters } from '../hooks/useFormatters';
 import { useAuth } from '../contexts/AuthContext';
@@ -15,7 +16,7 @@ const PortfolioPage = () => {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const res = await fetch('/api/dashboard/summary', {
+        const res = await apiFetch('/api/dashboard/summary', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await res.json();
