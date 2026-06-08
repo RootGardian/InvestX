@@ -32,6 +32,7 @@ import DepositPage from './pages/DepositPage';
 import BuyPage from './pages/BuyPage';
 import SellPage from './pages/SellPage';
 import AlertsPage from './pages/AlertsPage';
+import PriceAlertsPage from './pages/PriceAlertsPage';
 import LiveMarketsPage from './pages/LiveMarketsPage';
 
 // Admin Pages
@@ -95,6 +96,7 @@ function App() {
             <Route path="buy" element={<BuyPage />} />
             <Route path="sell" element={<SellPage />} />
             <Route path="alerts" element={<AlertsPage />} />
+            <Route path="price-alerts" element={<PriceAlertsPage />} />
             <Route path="profile" element={<ProfilePage />} />
           </Route>
 

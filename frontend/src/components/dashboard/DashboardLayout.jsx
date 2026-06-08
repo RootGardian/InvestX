@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, 
@@ -12,8 +12,10 @@ import {
   LogOut,
   Menu,
   X,
-  ArrowLeftRight
+  ArrowLeftRight,
+  Check
 } from 'lucide-react';
+import { apiFetch } from '../../utils/api';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { formatCurrency } from '../../utils/currency';
@@ -33,6 +35,69 @@ const DashboardLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const { token } = useAuth();
+  const notifRef = useRef();
+
+  useEffect(() => {
+    if (!token) return;
+    
+    const fetchNotifs = async () => {
+      try {
+        const res = await apiFetch('/api/notifications', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setNotifications(data);
+        }
+      } catch (err) {
+        console.error("Error fetching notifications", err);
+      }
+    };
+
+    fetchNotifs();
+    // Poll every 30s
+    const interval = setInterval(fetchNotifs, 30000);
+    return () => clearInterval(interval);
+  }, [token]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (notifRef.current && !notifRef.current.contains(e.target)) {
+        setShowNotifications(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const unreadCount = notifications.filter(n => !n.isRead).length;
+
+  const markAsRead = async (id) => {
+    try {
+      await apiFetch(`/api/notifications/${id}/read`, {
+        method: 'PUT',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      setNotifications(prev => prev.map(n => n.id === id ? { ...n, isRead: true } : n));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const markAllAsRead = async () => {
+    try {
+      await apiFetch('/api/notifications/read-all', {
+        method: 'PUT',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const navigation = [
     { name: t('nav.dashboard'), href: '/dashboard', icon: LayoutDashboard },
@@ -41,7 +106,8 @@ const DashboardLayout = () => {
     { name: t('nav.markets'), href: '/dashboard/markets', icon: BarChart2 },
     { name: t('nav.buy'), href: '/dashboard/buy', icon: TrendingUp },
     { name: t('nav.sell'), href: '/dashboard/sell', icon: TrendingDown },
-    { name: t('nav.alerts'), href: '/dashboard/alerts', icon: Bell },
+    { name: 'Trading P2P', href: '/dashboard/alerts', icon: ArrowLeftRight },
+    { name: 'Alertes', href: '/dashboard/price-alerts', icon: Bell },
   ];
 
   const handleLogout = () => {
@@ -133,7 +199,7 @@ const DashboardLayout = () => {
             <Menu className="h-5 w-5" />
           </button>
           
-          <div className="flex-1 overflow-hidden relative h-full md:pl-4 pl-16">
+          <div className="flex-1 overflow-hidden relative h-full md:pl-4 pl-16 pr-16">
             <div className="flex items-center h-full animate-[ticker_40s_linear_infinite] whitespace-nowrap">
               {[...livePrices, ...livePrices, ...livePrices].map((item, i) => (
                 <div key={i} className="flex items-center mx-6 gap-2">
@@ -146,6 +212,52 @@ const DashboardLayout = () => {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Notifications Bell */}
+          <div className="absolute right-4 h-full flex items-center" ref={notifRef}>
+            <button 
+              onClick={() => setShowNotifications(!showNotifications)}
+              className="relative p-2 text-textMuted hover:text-white transition-colors rounded-full hover:bg-card focus:outline-none"
+            >
+              <Bell className="w-5 h-5" />
+              {unreadCount > 0 && (
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+              )}
+            </button>
+
+            {/* Notifications Dropdown */}
+            {showNotifications && (
+              <div className="absolute top-14 right-0 w-80 bg-card border border-border rounded-xl shadow-2xl z-50 overflow-hidden flex flex-col max-h-[400px]">
+                <div className="p-3 border-b border-border flex justify-between items-center bg-[#0d1117]">
+                  <h3 className="font-bold text-sm text-textMain">Notifications</h3>
+                  {unreadCount > 0 && (
+                    <button 
+                      onClick={markAllAsRead}
+                      className="text-xs text-primary hover:text-primary/80 flex items-center gap-1"
+                    >
+                      <Check className="w-3 h-3" /> Tout lire
+                    </button>
+                  )}
+                </div>
+                <div className="overflow-y-auto flex-1 p-2 custom-scrollbar space-y-1">
+                  {notifications.length === 0 ? (
+                    <div className="text-center py-6 text-textMuted text-sm">Aucune notification</div>
+                  ) : (
+                    notifications.map(notif => (
+                      <div 
+                        key={notif.id} 
+                        onClick={() => !notif.isRead && markAsRead(notif.id)}
+                        className={`p-3 rounded-lg text-sm cursor-pointer transition-colors ${notif.isRead ? 'opacity-60 hover:bg-background/50' : 'bg-primary/10 border border-primary/20 hover:bg-primary/20'}`}
+                      >
+                        <h4 className={`font-bold ${notif.isRead ? 'text-textMain' : 'text-primary'}`}>{notif.title}</h4>
+                        <p className="text-textMuted mt-1 leading-snug">{notif.message}</p>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

@@ -24,6 +24,7 @@ model User {
   transactions    Transaction[]
   priceAlerts     PriceAlert[]
   orders          Order[]
+  notifications   Notification[]
 }
 
 model PortfolioAsset {
@@ -126,4 +127,17 @@ model SentimentAnalysis {
   processedAt     DateTime @default(now())
 
   @@index([ticker, processedAt])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([userId, createdAt])
 }

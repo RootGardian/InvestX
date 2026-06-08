@@ -12,6 +12,8 @@ const alertsRoutes = require('./routes/alerts.routes');
 const orderbookRoutes = require('./routes/orderbook.routes');
 const sentimentRoutes = require('./routes/sentiment.routes');
 const adminRoutes = require('./routes/admin.routes');
+const notificationsRoutes = require('./routes/notifications.routes');
+const alertsWorker = require('./services/alerts.service');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -33,6 +35,7 @@ app.use('/api/alerts', alertsRoutes);
 app.use('/api/orderbook', orderbookRoutes);
 app.use('/api/sentiment', sentimentRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/notifications', notificationsRoutes);
 
 // Basic Route
 app.get('/', (req, res) => {
@@ -41,4 +44,5 @@ app.get('/', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    alertsWorker.startWorker();
 });

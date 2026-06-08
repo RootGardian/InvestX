@@ -113,7 +113,7 @@ const AlertsPage = () => {
     
     return orders.slice(0, 10).map((o, i) => (
       <div key={i} className="flex justify-between items-center py-1 text-sm">
-        <span className="text-textMuted">{Number(o.quantity).toFixed(4)}</span>
+        <span className="text-textMuted">{Number(o.totalQuantity || o.quantity).toFixed(4)}</span>
         <span className={`font-bold ${type === 'bid' ? 'text-bullish' : 'text-bearish'}`}>
           {formatCurrency(o.price)}
         </span>
