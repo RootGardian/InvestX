@@ -102,7 +102,7 @@ const DashboardLayout = () => {
   const navigation = [
     { name: t('nav.dashboard'), href: '/dashboard', icon: LayoutDashboard },
     { name: t('nav.portfolio'), href: '/dashboard/portfolio', icon: Wallet },
-    { name: t('nav.deposit'), href: '/dashboard/deposit', icon: PlusCircle },
+    // { name: t('nav.deposit'), href: '/dashboard/deposit', icon: PlusCircle },
     { name: t('nav.markets'), href: '/dashboard/markets', icon: BarChart2 },
     { name: t('nav.buy'), href: '/dashboard/buy', icon: TrendingUp },
     { name: t('nav.sell'), href: '/dashboard/sell', icon: TrendingDown },
@@ -137,7 +137,7 @@ const DashboardLayout = () => {
     <div className="flex h-screen bg-background overflow-hidden text-textMain font-sans">
       
       {/* Sidebar (Desktop) */}
-      <div className="hidden md:flex md:w-[280px] md:flex-col border-r border-border bg-[#0d1117]">
+      <div className="hidden md:flex md:w-[280px] md:flex-col border-r border-border bg-card">
         <div className="flex flex-col flex-grow pt-8 overflow-y-auto">
           {/* Logo */}
           <div className="flex items-center flex-shrink-0 px-8 mb-10">
@@ -191,9 +191,9 @@ const DashboardLayout = () => {
       <div className="flex flex-col flex-1 w-0 overflow-hidden">
         
         {/* Top Ticker Bar */}
-        <div className="h-12 bg-[#0B0E14] border-b border-border flex items-center overflow-hidden flex-shrink-0 relative">
+        <div className="h-12 bg-card border-b border-border flex items-center overflow-hidden flex-shrink-0 relative">
           <button
-            className="px-4 text-textMuted focus:outline-none md:hidden z-10 bg-[#0B0E14] absolute left-0 h-full flex items-center border-r border-border"
+            className="px-4 text-textMuted focus:outline-none md:hidden z-10 bg-card absolute left-0 h-full flex items-center border-r border-border"
             onClick={() => setIsMobileMenuOpen(true)}
           >
             <Menu className="h-5 w-5" />
@@ -273,7 +273,7 @@ const DashboardLayout = () => {
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-50 flex md:hidden">
           <div className="fixed inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)}></div>
-          <div className="relative flex-1 flex flex-col max-w-[280px] w-full bg-[#0d1117] h-full shadow-2xl">
+          <div className="relative flex-1 flex flex-col max-w-[280px] w-full bg-card h-full shadow-2xl">
             <div className="absolute top-0 right-0 -mr-12 pt-4">
               <button
                 className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white bg-card"

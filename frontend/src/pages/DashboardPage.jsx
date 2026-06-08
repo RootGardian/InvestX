@@ -92,10 +92,10 @@ const DashboardPage = () => {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Link to="/dashboard/deposit" className="bg-primary hover:bg-primaryHover text-white px-6 py-2 rounded-lg font-medium transition-colors">
+          {/* <Link to="/dashboard/deposit" className="bg-primary hover:bg-primaryHover text-white px-6 py-2 rounded-lg font-medium transition-colors">
             {t('dashboard.deposit_btn')}
-          </Link>
-          <Link to="/dashboard/buy" className="bg-card hover:bg-border border border-border text-white px-6 py-2 rounded-lg font-medium transition-colors">
+          </Link> */}
+          <Link to="/dashboard/buy" className="bg-primary hover:bg-primaryHover border border-primary text-white px-6 py-2 rounded-lg font-medium transition-colors">
             {t('dashboard.buy_btn')}
           </Link>
         </div>
@@ -128,9 +128,9 @@ const DashboardPage = () => {
             </div>
           </div>
           <div className="text-3xl font-bold text-textMain mb-2">{formatCurrency(dashboardData?.cashBalance || 0, currency)}</div>
-          <Link to="/dashboard/deposit" className="text-sm text-primary font-medium hover:text-primaryHover transition-colors">
+          {/* <Link to="/dashboard/deposit" className="text-sm text-primary font-medium hover:text-primaryHover transition-colors">
             + {t('dashboard.add_btn')}
-          </Link>
+          </Link> */}
         </div>
         
         {/* Card 3 */}
